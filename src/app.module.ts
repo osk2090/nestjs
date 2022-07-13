@@ -13,8 +13,6 @@ import * as mongoose from 'mongoose';
     CatsModule, MongooseModule.forRoot(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreatedIndex: true,
-      useFindAndModify: false,
     })],
   controllers: [AppController],
   providers: [AppService],

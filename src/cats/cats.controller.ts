@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Patch, Post, Put } from '@nestjs/common';
+import {Body, Controller, Delete, Get, Patch, Post, Put} from '@nestjs/common';
 import { CatsService } from './cats.service';
 
 @Controller('cats')
@@ -11,7 +11,8 @@ export class CatsController {
   }
 
   @Post('login')
-  async signUp() {
+  async signUp(@Body() body) {
+    console.log(body);
     return 'signup';
   }
 
