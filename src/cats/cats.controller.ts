@@ -1,5 +1,6 @@
 import {Body, Controller, Delete, Get, Patch, Post, Put} from '@nestjs/common';
 import { CatsService } from './cats.service';
+import {CatsRequestDto} from "./dto/cats.request.dto";
 
 @Controller('cats')
 export class CatsController {
@@ -10,10 +11,9 @@ export class CatsController {
     return 'current cat';
   }
 
-  @Post('login')
-  async signUp(@Body() body) {
-    console.log(body);
-    return 'signup';
+  @Post()
+  async signUp(@Body() body: CatsRequestDto) {
+    return await this.catsService.signUp(body);
   }
 
   @Post('logout')
