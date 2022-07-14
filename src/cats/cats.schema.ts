@@ -46,5 +46,3 @@ CatSchema.virtual('readOnlyData').get(function (this: Cat) {
         name: this.name,
     }
 });
-//npm i --save class-validator class-transformer
-//class validation 라이브러리 다운
