@@ -18,4 +18,8 @@ export class CatsRepository {
     async create(cat: CatsRequestDto): Promise<Cat> {
         return await this.catModel.create(cat);
     }
-}.
+
+    async findCatByEmail(email: string): Promise<Cat | null> {
+        return this.catModel.findOne({email});
+    }
+}
