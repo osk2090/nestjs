@@ -18,3 +18,5 @@ nest g module auth
 nest g service auth
 
 npm install express-basic-auth
+
+npm i -D @types/multer

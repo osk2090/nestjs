@@ -3,9 +3,11 @@ import { AppModule } from './app.module';
 import {SwaggerModule, DocumentBuilder, OpenAPIObject} from '@nestjs/swagger';
 import {HttpException, ValidationPipe} from "@nestjs/common";
 import * as expressBasicAuth from "express-basic-auth";
+import {NestExpressApplication} from "@nestjs/platform-express";
+import * as path from "path";
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create<NestExpressApplication>(AppModule);
     app.useGlobalPipes(new ValidationPipe({transform: true}));
     // app.useGlobalFilters(new HttpExceptionFilter());
     app.use(
@@ -17,6 +19,10 @@ async function bootstrap() {
             }
         }),
     );
+
+    app.useStaticAssets(path.join(__dirname,'./common','uploads'),{
+        prefix: '/media',
+    });
   const config = new DocumentBuilder()
       .setTitle('C.I.C')
       .setDescription('cat')
