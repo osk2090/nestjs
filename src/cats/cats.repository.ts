@@ -1,4 +1,4 @@
-import {HttpException, Injectable} from "@nestjs/common";
+import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
 import {Cat} from "./cats.schema";
 import {Model} from "mongoose";
@@ -21,5 +21,9 @@ export class CatsRepository {
 
     async findCatByEmail(email: string): Promise<Cat | null> {
         return this.catModel.findOne({email});
+    }
+
+    async findCatByIdWithoutPassword(catId: string): Promise<CatsRequestDto | null> {
+        return this.catModel.findById(catId).select('-password');
     }
 }
