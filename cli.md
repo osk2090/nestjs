@@ -16,3 +16,5 @@ npm install --save-dev @types/passport-local
 auth 관련 클래스 생성
 nest g module auth
 nest g service auth
+
+npm install express-basic-auth
