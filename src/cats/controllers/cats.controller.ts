@@ -12,9 +12,9 @@ import {
   UseInterceptors
 } from '@nestjs/common';
 import { CatsService } from '../services/cats.service';
-import {CatsRequestDto} from "../dto/cats.request.dto";
+import {CatsRequestDto} from "../dtos/cats.request.dto";
 import {ApiOperation, ApiResponse} from "@nestjs/swagger";
-import {ReadOnlyCatDto} from "../dto/cat.dto";
+import {ReadOnlyCatDto} from "../dtos/cat.dto";
 import {AuthService} from "../../auth/auth.service";
 import {LoginRequestDto} from "../../auth/dto/login.request.dto";
 import {JwtAuthGuard} from "../../auth/jwt/jwt.guard";
@@ -73,5 +73,12 @@ export class CatsController {
     // return 'uploadImg';
     // return {image: `http://localhost:8000/media/cats/${files[0].filename}`}
     return this.catsService.uploadImg(cat, files);
+  }
+
+  @ApiOperation({summary: '모든 고양이 가져오기'})
+  @Get('all')
+  getAllCat() {
+    console.log(this.catsService.getAllCat());
+    return this.catsService.getAllCat();
   }
 }

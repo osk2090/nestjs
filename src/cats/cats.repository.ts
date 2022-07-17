@@ -1,8 +1,8 @@
 import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
 import {Cat} from "./cats.schema";
-import {Model} from "mongoose";
-import {CatsRequestDto} from "./dto/cats.request.dto";
+import {Model, Schema, Types} from "mongoose";
+import {CatsRequestDto} from "./dtos/cats.request.dto";
 
 @Injectable()
 export class CatsRepository {
@@ -10,7 +10,6 @@ export class CatsRepository {
     }
 
     async existByEmail(email: string): Promise<boolean> {
-
         const result = await this.catModel.exists({email});
         return !!result;
     }
@@ -23,7 +22,7 @@ export class CatsRepository {
         return this.catModel.findOne({email});
     }
 
-    async findCatByIdWithoutPassword(catId: string): Promise<CatsRequestDto | null> {
+    async findCatByIdWithoutPassword(catId: string | Types.ObjectId): Promise<Cat | null> {
         return this.catModel.findById(catId).select('-password');
     }
 
@@ -33,5 +32,9 @@ export class CatsRepository {
         const newCat = await cat.save();//업데이트후 저장
         console.log(newCat);
         return newCat.readOnlyData;
+    }
+
+    async findAll() {
+        return this.catModel.find();
     }
 }

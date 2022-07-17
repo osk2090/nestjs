@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import {Document, SchemaOptions} from 'mongoose';
 import {IsEmail, IsNotEmpty, IsString} from "class-validator";
+import {ApiProperty} from "@nestjs/swagger";
 
 const options:SchemaOptions = {
     timestamps: true,
@@ -9,6 +10,10 @@ const options:SchemaOptions = {
 @Schema(options)
 export class Cat extends Document {
 
+    @ApiProperty({
+        description: 'email',
+        required: true,
+    })
     @Prop({
             required: true,
             unique: true,
@@ -18,11 +23,19 @@ export class Cat extends Document {
     @IsNotEmpty()
     email: string;
 
+    @ApiProperty({
+        description: 'name',
+        required: true,
+    })
     @Prop({required: true})
     @IsString()
     @IsNotEmpty()
     name: string;
 
+    @ApiProperty({
+        description: 'password',
+        required: true,
+    })
     @Prop({
         required: true,
     })
@@ -30,6 +43,10 @@ export class Cat extends Document {
     @IsNotEmpty()
     password: string;
 
+    @ApiProperty({
+        description: 'imgUrl',
+        required: true,
+    })
     @Prop({
         default:
             'https://raw.githubusercontent.com/amamov/teaching-nestjs-a-to-z/main/images/1.jpeg',
@@ -41,9 +58,9 @@ export class Cat extends Document {
     readonly readOnlyData: { id: string, email: string, name: string, imgUrl: string; };
 }
 
-export const CatSchema = SchemaFactory.createForClass(Cat);
+export const _CatSchema = SchemaFactory.createForClass(Cat);
 
-CatSchema.virtual('readOnlyData').get(function (this: Cat) {
+_CatSchema.virtual('readOnlyData').get(function (this: Cat) {
     return {
         id: this.id,
         email: this.email,
@@ -51,3 +68,13 @@ CatSchema.virtual('readOnlyData').get(function (this: Cat) {
         imgUrl: this.imgUrl,
     };
 });
+
+_CatSchema.virtual('comments',{
+    ref: 'comments',
+    localField: '_id',
+    foreignField: 'info',
+})
+_CatSchema.set('toObject',{virtuals: true})
+_CatSchema.set('toJSON', {virtuals: true});
+
+export const CatSchema = _CatSchema;

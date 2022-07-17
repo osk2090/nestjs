@@ -20,3 +20,12 @@ nest g service auth
 npm install express-basic-auth
 
 npm i -D @types/multer
+
+module 생성
+nest g mo 이름
+
+controller 생성
+nest g co 이름
+
+service 생성
+nest g s 이름
