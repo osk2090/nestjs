@@ -1,9 +1,9 @@
-import {HttpException, Injectable, UnauthorizedException} from '@nestjs/common';
+import {Injectable, UnauthorizedException} from '@nestjs/common';
 import {Cat} from "../cats.schema";
 import * as bcrypt from 'bcrypt';
-import {Model} from "mongoose";
 import {CatsRequestDto} from "../dtos/cats.request.dto";
 import {CatsRepository} from "../cats.repository";
+import {read} from "fs";
 
 @Injectable()
 export class CatsService {

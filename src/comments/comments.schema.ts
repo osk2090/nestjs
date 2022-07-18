@@ -5,6 +5,7 @@ import {Document, Types} from "mongoose";
 
 const options:SchemaOptions = {
     timestamps: true,
+    collection: 'comments',
 }
 
 @Schema(options)
@@ -21,7 +22,7 @@ export class Comments extends Document {
         }
     )
     @IsNotEmpty()
-    author: string;
+    author: Types.ObjectId;
 
     @ApiProperty({
         description: '댓글 컨텐츠',
@@ -40,7 +41,6 @@ export class Comments extends Document {
     @Prop({
         default: 0,
     })
-    @IsNumber()
     @IsPositive()
     likeCount: number;
 

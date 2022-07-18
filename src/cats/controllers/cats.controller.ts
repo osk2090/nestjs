@@ -78,7 +78,6 @@ export class CatsController {
   @ApiOperation({summary: '모든 고양이 가져오기'})
   @Get('all')
   getAllCat() {
-    console.log(this.catsService.getAllCat());
     return this.catsService.getAllCat();
   }
 }

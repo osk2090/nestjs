@@ -11,7 +11,7 @@ export class CommentsController {
     @ApiOperation({
         summary: '모든 고양이 프로필에 적힌 댓글 가져오기',
     })
-    @Get('comments')
+    @Get()
     async getAllComments() {
         return this.commentsService.getAllComments();
     }
@@ -25,7 +25,7 @@ export class CommentsController {
     }
 
     @ApiOperation({
-        summary: '좋아요 수 올리기',
+        summary: '댓글 좋아요 수 올리기',
     })
     @Patch(':id')
     async plusLike(@Param('id') id: string) {

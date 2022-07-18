@@ -14,8 +14,7 @@ export class CommentsService {
 
     async getAllComments() {
         try {
-            const comments = await this.commentsModel.find();
-            return comments;
+            return await this.commentsModel.find();
         } catch (error) {
             throw new BadRequestException(error.message);
         }
